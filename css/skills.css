@@ -1,0 +1,88 @@
+/* ============================================================
+   skills.css — Styles for skills.html
+   ============================================================ */
+
+/* ─── SKILL BARS SECTION ─── */
+.skill-bars-section { background: var(--bg); }
+
+.skills-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+.skill-category-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.skill-bar-item { margin-bottom: 24px; }
+.skill-bar-header {
+  display: flex; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.skill-bar-name { font-size: 0.78rem; color: var(--text); }
+.skill-bar-pct  { font-size: 0.7rem; color: var(--accent); }
+.skill-bar-track {
+  height: 3px;
+  background: var(--surface2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.skill-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── CERTIFICATIONS ─── */
+.certs-section { background: var(--surface); }
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.cert-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 32px;
+  display: flex; align-items: center; gap: 24px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.cert-card:hover { border-color: rgba(232,255,71,0.3); transform: translateY(-4px); }
+.cert-icon {
+  font-size: 2rem; color: var(--accent);
+  flex-shrink: 0; width: 48px; text-align: center;
+}
+.cert-issuer {
+  font-size: 0.65rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 6px;
+}
+.cert-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 0.9rem;
+  line-height: 1.4; margin-bottom: 8px;
+}
+.cert-year {
+  font-size: 0.7rem; color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .skills-columns { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .skills-columns { grid-template-columns: 1fr; }
+  .certs-grid     { grid-template-columns: 1fr; }
+}
