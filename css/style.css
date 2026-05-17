@@ -48,6 +48,8 @@ body::before {
   pointer-events: none;
   z-index: 9997;
   opacity: 0.025;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* ─── CUSTOM CURSOR ─── */
@@ -152,6 +154,7 @@ nav.scrolled { background: rgba(8,10,15,0.97); border-color: var(--border); }
 }
 .marquee-track {
   display: flex; animation: marquee 25s linear infinite; width: max-content;
+  will-change: transform;
 }
 .marquee-section:hover .marquee-track { animation-play-state: paused; }
 .marquee-item {
