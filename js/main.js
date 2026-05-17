@@ -239,4 +239,48 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 })();
 
+/* ─── CONTACT FORM (Web3Forms AJAX) ─── */
+(function () {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = form.querySelector('.form-submit');
+    const originalText = btn.textContent;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    const formData = new FormData(form);
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+    })
+    .then(async (response) => {
+      let json = await response.json();
+      if (response.status == 200) {
+        btn.textContent = '✓ Message Sent!';
+        btn.style.background = '#4ade80';
+        form.reset();
+      } else {
+        console.log(response);
+        btn.textContent = 'Error Sending!';
+        btn.style.background = '#ff4d4d';
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      btn.textContent = 'Error Sending!';
+      btn.style.background = '#ff4d4d';
+    })
+    .finally(() => {
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 3000);
+    });
+  });
+})();
+
 /* ─── END OF MAIN.JS ─── */
