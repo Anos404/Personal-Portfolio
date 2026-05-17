@@ -38,18 +38,31 @@
   cursor.style.opacity = '0';
   ring.style.opacity   = '0';
 
+  let cursorVisible = false;
+  let cursorTicking = false;
+
   document.addEventListener('mousemove', e => {
     mx = e.clientX;
     my = e.clientY;
-    // Dot follows instantly — no lerp, no lag
-    moveCursor(mx, my);
-    cursor.style.opacity = '1';
-    ring.style.opacity   = '0.9';
+    
+    if (!cursorTicking) {
+      requestAnimationFrame(() => {
+        moveCursor(mx, my);
+        if (!cursorVisible) {
+          cursor.style.opacity = '1';
+          ring.style.opacity   = '0.9';
+          cursorVisible = true;
+        }
+        cursorTicking = false;
+      });
+      cursorTicking = true;
+    }
   }, { passive: true });
 
   document.addEventListener('mouseleave', () => {
     cursor.style.opacity = '0';
     ring.style.opacity   = '0';
+    cursorVisible = false;
   });
 
   // Ring lerp loop — only runs, never stacks
@@ -81,9 +94,19 @@
 (function () {
   const navbar = document.getElementById('navbar');
   if (!navbar) return;
-  navbar.classList.toggle('scrolled', window.scrollY > 50);
-  window.addEventListener('scroll', () => {
+  let ticking = false;
+  
+  function updateNav() {
     navbar.classList.toggle('scrolled', window.scrollY > 50);
+    ticking = false;
+  }
+  
+  updateNav();
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateNav);
+      ticking = true;
+    }
   }, { passive: true });
 })();
 
