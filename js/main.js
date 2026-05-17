@@ -239,24 +239,4 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 })();
 
-/* ─── CONTACT FORM ─── */
-(function () {
-  const form = document.getElementById('contactForm');
-  if (!form) return;
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const btn = form.querySelector('.form-submit');
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = '✓ Message Sent!';
-      btn.style.background = '#4ade80';
-      form.reset();
-      setTimeout(() => {
-        btn.textContent = 'Send Message';
-        btn.style.background = '';
-        btn.disabled = false;
-      }, 3000);
-    }, 1500);
-  });
-})();
+/* ─── END OF MAIN.JS ─── */
