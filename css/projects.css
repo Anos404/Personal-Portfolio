@@ -301,6 +301,7 @@ select.apf-input { cursor: none; appearance: none; }
   pointer-events: none;  /* prevent interaction - it's decorative */
   border-radius: 0;
   transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+  will-change: transform;
 }
 /* Fallback: if iframe blocked by X-Frame-Options show gradient */
 .project-preview.iframe-blocked .project-iframe { display: none; }
