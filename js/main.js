@@ -251,10 +251,16 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     btn.disabled = true;
 
     const formData = new FormData(form);
+    const object = Object.fromEntries(formData.entries());
+    const jsonStr = JSON.stringify(object);
 
     fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      body: formData
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: jsonStr
     })
     .then(async (response) => {
       let json = await response.json();
